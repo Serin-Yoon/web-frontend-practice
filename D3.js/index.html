@@ -5,26 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/two.min.js"></script>
     <title>D3 test</title>
 </head>
 <body>
     <script>
-
-        var dataArray = [20, 40, 50];
-
-        var canvas = d3.select("body")
-                    .append("svg")
-                    .attr("width", 500)
-                    .attr("height", 500);
-        
-        var bars = canvas.selectAll("rect")
-                    .data(dataArray)
-                    .enter()
-                        .append("rect")
-                        .attr("width", function(d) {return d*10;})
-                        .attr("height", 50)
-                        .attr("y", function(d, i) {return i*100;})
-        
+      var two = new Two({
+        fullscreen: true,
+        autostart: true
+      }).appendTo(document.body);
+      var rect = two.makeRectangle(two.width / 2, two.height / 2, 50 ,50);
+      two.bind('update', function() {
+        rect.rotation += 0.001;
+      });
     </script>
-</body>
+  </body>
 </html>
