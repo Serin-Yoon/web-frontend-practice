@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Data Visualization Test</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body style="text-align:center">
+    <h1>Data Visualization Test</h1>
+    <br />
+
+    <div class="parent">
+        <div class="first">
+            <h3>Doughnut Chart - 사용자 분석 및 추천</h3>
+            <br /><br />
+            <canvas id="myChart"></canvas>
+            <br /><br />
+        </div>
+        <div class="second">
+            <h3>Bar Graph - 사용자 커밋 비교</h3>
+            <br />
+            <input type="text" id="name" name="name" size="50px" placeholder="비교하고자 하는 유저의 아이디를 입력하세요.">
+            <br /><br />
+            <canvas id="myChart2"></canvas>
+            <br /><br />
+        </div>
+    </div>
+    <script>
+        // 지금은 데이터가 애초에 object 형태지만, 만약에 string 형태로 오면 나중에 형변환
+        const data = {
+            'CSS': 1873975,
+            'HTML': 1729301,
+            'JavaScript': 2614820,
+            'Python': 14844120,
+            'C#': 243012,
+            'ShaderLab': 80173,
+            'HLSL': 13994,
+            'SCSS': 23061,
+            'Kotlin': 28451,
+            'PowerShell': 20634,
+            'Batchfile': 3975,
+            'Shell': 3716,
+            'R': 870
+        };
+
+        console.log(Object.keys(data));
+        console.log(Object.values(data));
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var doughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(data),
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: [
+                        '#7D93C8',    
+                        '#F88379',
+                        '#F8DDB8',
+                        '#B17B70',
+                        '#F6E1B1',
+                        '#8F7068',
+                        '#639366',
+                        '#E3B7D2',
+                        '#FF9966',
+                        '#BFE7F6',
+                        '#808080',
+                        '#C4577C',
+                        '#FFE666'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 1,
+                    hoverBorderColor: '#000',
+                    hoverBorderWidth: 1,
+                    data: Object.values(data),
+                }]
+            },
+            options: {}
+        })
+    
+        var ctx2 = document.getElementById('myChart2').getContext('2d');
+
+        var myBarChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['2021-02-21', '2021-02-22', '2021-02-23', '2021-02-24', '2021-02-25'],
+                datasets: [{
+                    label: 'Bar Dataset',
+                    backgroundColor: [
+                        '#000',
+                        '#000',
+                        '#000',
+                        '#000',
+                        '#000',
+                    ],
+                    barPercentage: 0.5,
+                    barThickness: 3,
+                    maxBarThickness: 3,
+                    minBarLength: 2,
+                    data: [3, 4, 2, 1, 5]
+                },
+                {
+                label: 'Line Dataset',
+                    data: [3, 4, 2, 1, 5],
+                    type: 'line'
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            offsetGridLines: true
+                        }
+                    }]
+                }
+            }
+            
+        });
+    
+    </script>
+
+    
+</body>
+</html>
